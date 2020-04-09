@@ -1,76 +1,68 @@
-# Deploy smart contract on Kylin Testnet with LiquidApps
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Step 1: Create Account
+## Available Scripts
 
-```bash
-curl http://faucet-kylin.blockzone.net/create/trinhtan1234
-```
+In the project directory, you can run:
 
-## Step 2: Faucet
+### `yarn start`
 
-```bash
-curl http://faucet-kylin.blockzone.net/get_token/trinhtan1234
-```
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Step 3: Create wallet by cleos
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-```bash
-cleos wallet create -n trinhtan1234 --to-console
-```
+### `yarn test`
 
-## Step 4: Unlock Wallet
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```bash
-cleos wallet unlock -n trinhtan1234
-```
+### `yarn build`
 
-## Step 5: Import active private key
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```bash
-cleos wallet import -n trinhtan1234 --private-key ACTIVE_PRIVATE_KEY
-```
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-## Step 6: Buy ram for account
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```bash
-cleos -u https://api.kylin.alohaeos.com:443  system buyram trinhtan1234 trinhtan1234 "50.0000 EOS" -p trinhtan1234@active
-```
+### `yarn eject`
 
-## Step 7: Deploy contract
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-```bash
-cleos -u https://api.kylin.alohaeos.com:443 set contract trinhtan1234 contracts/eos/tzfe -p trinhtan1234@active
-```
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Step 8: Faucet Dapp Token in https://kylin-dapp-faucet.liquidapps.io/
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-## Step 9: Stake for services
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-```bash
-cleos -u https://kylin.eos.dfuse.io push transaction '{"delay_sec":0,"max_cpu_usage_ms":0,"actions":[{"account":"dappservices","name":"selectpkg","data":{"owner":"trinhtan1234","provider":"heliosselene","service":"accountless1","package":"accountless1"},"authorization":[{"actor":"trinhtan1234","permission":"active"}]}]}'
+## Learn More
 
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-```bash
-cleos -u https://kylin.eos.dfuse.io push transaction '{"delay_sec":0,"max_cpu_usage_ms":0,"actions":[{"account":"dappservices","name":"stake","data":{"from":"trinhtan1234","provider":"heliosselene","service":"accountless1","quantity":"10.0000 DAPP"},"authorization":[{"actor":"trinhtan1234","permission":"active"}]}]}'
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-```
+### Code Splitting
 
-## Step 10: Xvinit
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-```bash
-cleos -u https://kylin.eos.dfuse.io push action trinhtan1234 xvinit '["5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191"]' -p trinhtan1234
-```
+### Analyzing the Bundle Size
 
-## Step 11: Set Permission Contract
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-```bash
-export KYLIN_TEST_ACCOUNT=trinhtan1234
-export KYLIN_TEST_PUBLIC_KEY=<ACTIVE_PUBLIC-KEY>
-export EOS_ENDPOINT=https://kylin-dsp-2.liquidapps.io
-```
+### Making a Progressive Web App
 
-```bash
-cleos -u $EOS_ENDPOINT set account permission $KYLIN_TEST_ACCOUNT active "{\"threshold\":1,\"keys\":[{\"weight\":1,\"key\":\"$KYLIN_TEST_PUBLIC_KEY\"}],\"accounts\":[{\"permission\":{\"actor\":\"$KYLIN_TEST_ACCOUNT\",\"permission\":\"eosio.code\"},\"weight\":1}]}" owner -p $KYLIN_TEST_ACCOUNT@active
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-```
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
